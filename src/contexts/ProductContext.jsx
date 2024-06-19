@@ -1,9 +1,24 @@
-import React, { createContext} from 'react'
+import React, { createContext, useEffect, useState} from 'react'
+import axiosInstance from '../utils/axios'
 export const productcontext = createContext(null)
 
 const ProductContext = ({children}) => {
+    const [prods, setprods] = useState([])
+
+    const getProds = async() => {
+        const {data} = await axiosInstance.get('/products')
+        setprods(data)
+    }
+    
+    useEffect(() => {
+      getProds()
+
+    }, [])
+    
+    
+
   return (
-    <productcontext.Provider value={"asd"}>
+    <productcontext.Provider value={[prods,setprods]}>
         {children}
     </productcontext.Provider>
   )
