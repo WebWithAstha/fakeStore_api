@@ -3,7 +3,7 @@ import axiosInstance from '../utils/axios'
 export const productcontext = createContext(null)
 
 const ProductContext = ({children}) => {
-    const [prods, setprods] = useState([])
+    const [prods, setprods] = useState(null)
 
     const getProds = async() => {
         const {data} = await axiosInstance.get('/products')
