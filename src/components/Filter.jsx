@@ -23,7 +23,7 @@ const Filter = () => {
           
           <Link to='/create' >
           
-          <button className=' px-6 hover:bg-slate-900 text-center mt-4 bg-slate-700 py-2 text-white cursor-pointer transition-colors duration-300'>Add Prod</button>
+          <button className=' px-6 w-full hover:bg-slate-900 text-center mt-4 bg-slate-700 py-2 text-white cursor-pointer transition-colors duration-300'>Add Prod</button>
           </Link>
         </ul>
         

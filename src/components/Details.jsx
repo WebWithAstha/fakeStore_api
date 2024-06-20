@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { productcontext } from '../contexts/ProductContext'
 import axiosInstance from '../utils/axios'
+import LoadingDetails from './LoadingDetails'
 
 const Product = () => {
   const navigate = useNavigate()
@@ -15,8 +16,9 @@ const Product = () => {
 
   useEffect(() => {
     getProd()
-
+    
   }, [])
+  console.log(prod)
   
 
   return ( prod ?
@@ -44,7 +46,7 @@ const Product = () => {
         </div>
       </div>
     </div>
-    </>:"loading"
+    </>:<LoadingDetails/>
   )
 }
 

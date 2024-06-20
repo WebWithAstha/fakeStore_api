@@ -5,6 +5,7 @@ import Nav from './Nav'
 import { productcontext } from '../contexts/ProductContext'
 import { useLocation } from 'react-router-dom'
 import axiosInstance from '../utils/axios'
+import LoadingHome from './LoadingHome'
 
 
 const Home = () => {
@@ -50,7 +51,7 @@ const Home = () => {
           {return <ProdCard key={index} id={prod.id}/>}
 
        
-        ):<h1 className='mt-54 text-center text-7xl font-bold'>Loadin...</h1>}
+        ):<LoadingHome/>}
         
       </div>
 
