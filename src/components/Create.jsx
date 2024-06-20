@@ -1,47 +1,108 @@
-import React from 'react'
+import { nanoid } from 'nanoid'
+import React, { useState } from 'react'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 
 const Create = () => {
+    const [prods, setprods] = useState(JSON.parse(localStorage.getItem("products"))|| [])
+    const navigate = useNavigate()
+
+
+    const [title, settitle] = useState('')
+    const [image, setimage] = useState('')
+    const [desc, setdesc] = useState('')
+    const [rate, setrate] = useState('')
+    const [count, setcount] = useState('')
+    const [category, setcategory] = useState('')
+    const [price, setprice] = useState('')
+
+    const submitHandler = (e) => {
+        e.preventDefault()
+        const newProd = {id:nanoid(),title,image,description:desc,rating:{rate,count},category,price}
+        console.log(newProd)
+        setprods([...prods,newProd])
+        localStorage.setItem("products",JSON.stringify([...prods,newProd]))
+        settitle('')
+        setimage('')
+        setdesc('')
+        setrate('')
+        setcount('')
+        setcategory('')
+        setprice('')
+        navigate("/")
+        
+
+
+
+        
+
+    }
+
     return (
         <>
-        <div className="h-screen w-full flex items-center justify-center">
+            <div className="w-full min-h-screen">
+                <div className="back px-40 py-4 bg-gray-100 ">
+                    <Link to='/'>
+                        <h1 className="px-2 w-max cursor-pointer py-2 text-xl flex items-center gap-4">&#60; <span className='font-normal'>back</span></h1>
+                    </Link>
+                </div>
+                <div className="w-[50%] mt-10 mx-auto relative overflow-hidden z-10 bg-white p-8 rounded-lg shadow-md before:w-64 before:h-40 before:absolute before:bg-slate-200 before:rounded-full before:-z-10 before:blur-2xl after:w-80 after:h-32 after:absolute after:bg-slate-200 after:rounded-full after:-z-10 after:blur-xl after:bottom-24 after:-right-12">
+                    <h2 className="text-2xl text-sky-900 font-bold mb-6">Upload Product</h2>
 
-            <div className="max-w-md mx-auto relative overflow-hidden z-10 bg-white p-8 rounded-lg shadow-md before:w-24 before:h-24 before:absolute before:bg-purple-500 before:rounded-full before:-z-10 before:blur-2xl after:w-32 after:h-32 after:absolute after:bg-sky-400 after:rounded-full after:-z-10 after:blur-xl after:top-24 after:-right-12">
-                <h2 className="text-2xl text-sky-900 font-bold mb-6">Update Your Profile</h2>
+                    <form onSubmit={submitHandler} method="post" action="#">
+                        <div className="mb-4">
+                            <input onChange={(e) => settitle(e.target.value)} value={title} className="mt-1 shadow-inner p-2 w-full border rounded-md" type="text" placeholder='Title' />
+                        </div>
+                        <div className="mb-4">
+                            <input onChange={e => setimage(e.target.value)} value={image} className="mt-1 p-2 w-full border rounded-md" type="text" placeholder='Img Url' />
+                        </div>
+                        <div className="mb-4">
+                            <input onChange={e => setprice(e.target.value)} value={price} className="mt-1 p-2 w-full border rounded-md" type="Number" min="1" max="100000" placeholder='Price' />
+                        </div>
+                        <div className="mb-4">
+                            <input onChange={e => setrate(e.target.value)} value={rate} className="mt-1 p-2 w-full border rounded-md" type="Number" min="0" max="5" placeholder='Customer rate' />
+                        </div>
+                        <div className="mb-4">
+                            <input onChange={e => setcount(e.target.value)} value={count} className="mt-1 p-2 w-full border rounded-md" type="Number" min="0" max="100000" placeholder='Rate count' />
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-600" htmlFor="category"
+                            >Category</label>
+                            <select defaultValue={category} onChange={e => setcategory(e.target.value)} className='mt-1 p-2 w-full border rounded-md' name="" id="">
+                                <option value="men's clothing">men's clothing</option>
+                                <option value="women's clothing">women's clothing</option>
+                                <option value="jewelery">jewelery</option>
+                                <option value="electronics">electronics</option>
+                            </select>
+                        </div>
 
-                <form method="post" action="#">
-                    <div className="mb-4">
-                        <input className="mt-1 p-2 w-full border rounded-md" type="text" placeholder='Title' />
-                    </div>
-                    <div className="mb-4">
-                        <input className="mt-1 p-2 w-full border rounded-md" type="text" placeholder='Img Url' />
-                    </div>
-                    <div className="mb-4">
-                        <input className="mt-1 p-2 w-full border rounded-md" type="text" placeholder='category' />
-                    </div>
 
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-600" htmlFor="bio"
+                            >Description</label>
+                            <textarea
+                                onChange={e => setdesc(e.target.value)}
+                                value={desc}
+                                className="mt-1 p-2 w-full border rounded-md"
+                                rows="3"
+                                name="bio"
+                                id="bio"
+                            ></textarea>
+                        </div>
 
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-600" htmlFor="bio"
-                        >Description</label>
-                        <textarea
-                            className="mt-1 p-2 w-full border rounded-md"
-                            rows="3"
-                            name="bio"
-                            id="bio"
-                        ></textarea>
-                    </div>
+                        <div className="flex justify-end">
+                            <button
+                                className="[background:linear-gradient(144deg,#9a9ea3,#7b89b0_50%,#3b4256)] text-white px-4 py-2 font-bold rounded-md hover:opacity-80"
+                                type="submit"
+                            >
+                                Upload Product
+                            </button>
+                        </div>
+                    </form>
+                </div>
 
-                    <div className="flex justify-end">
-                        <button
-                            className="[background:linear-gradient(144deg,#af40ff,#5b42f3_50%,#00ddeb)] text-white px-4 py-2 font-bold rounded-md hover:opacity-80"
-                            type="submit"
-                        >
-                            Update Profile
-                        </button>
-                    </div>
-                </form>
             </div>
-        </div>
+
+
 
         </>
     )
