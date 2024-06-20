@@ -42,11 +42,13 @@ const Home = () => {
     <div className="flex w-full relative min-h-screen bg-slate-100">
       <Filter/>
       
+      
       <div className="prods flex-1 lg:px-20 md:px-10 lg:py-10 md:py-4 px-6 py-8 h-max grid grid-cols-1 lg:grid-cols-5 md:grid-cols-3 gap-8">
 
         {filteredProds ? 
         filteredProds.map((prod,index)=>
           {return <ProdCard key={index} id={prod.id}/>}
+
        
         ):<h1 className='mt-54 text-center text-7xl font-bold'>Loadin...</h1>}
         

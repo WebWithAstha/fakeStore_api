@@ -19,7 +19,6 @@ const Create = () => {
                         <input className="mt-1 p-2 w-full border rounded-md" type="text" placeholder='category' />
                     </div>
 
-                    
 
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-600" htmlFor="bio"
