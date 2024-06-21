@@ -12,21 +12,20 @@ const Create = () => {
     const [desc, setdesc] = useState('')
     const [rate, setrate] = useState('')
     const [count, setcount] = useState('')
-    const [category, setcategory] = useState('')
+    const [category, setcategory] = useState("men's clothing")
     const [price, setprice] = useState('')
 
     const submitHandler = (e) => {
         e.preventDefault()
-        const newProd = {id:nanoid(),title,image,description:desc,rating:{rate,count},category,price}
-        console.log(newProd)
-        setprods([...prods,newProd])
-        localStorage.setItem("products",JSON.stringify([...prods,newProd]))
+        const updatedProd = {id:nanoid(),title,image,description:desc,rating:{rate,count},category,price}
+        setprods([...prods,updatedProd])
+        localStorage.setItem("products",JSON.stringify([...prods,updatedProd]))
         settitle('')
         setimage('')
         setdesc('')
         setrate('')
         setcount('')
-        setcategory('')
+        setcategory("men's clothing")
         setprice('')
         navigate("/")
         
