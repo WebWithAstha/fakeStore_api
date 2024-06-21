@@ -8,17 +8,29 @@ const Product = () => {
   const navigate = useNavigate()
   const {id} = useParams()
   const [prod, setProd] = useState()
+  const [prods,setprods] = useContext(productcontext)
+  const [localProds, setlocalProds] = useState(JSON.parse(localStorage.getItem("products"))|| [])
+
 
   const getProd = async ()=>{
-    const {data} = await axiosInstance.get(`/products/${id}`)
+    let {data} = await axiosInstance.get(`/products/${id}`)
+    if(data.length == 0){
+      data = prods.find(prod => prod.id === id)
+    }
     setProd(data)
+  }
+  
+  const deleteHandler = ()=>{
+    const updatedProds = prods.filter(prod => prod.id!== id)
+    setprods(updatedProds)
+    const updatedLocalProds = localProds.filter(prod => prod.id!== id)
+    localStorage.setItem("products",JSON.stringify(updatedLocalProds))
+    navigate('/')
   }
 
   useEffect(() => {
     getProd()
-    
-  }, [])
-  console.log(prod)
+  }, [prods])
   
 
   return ( prod ?
@@ -30,7 +42,7 @@ const Product = () => {
       </Link>
       </div>
     
-    <div className='flex px-40 py-24 gap-20'>
+    <div className='px-40 py-8 flex  items-center h-max gap-20'>
       <div className="img w-[30vw] aspect-square p-6 bg-white border">
         <img className='w-full h-full object-contain' src={prod.image} alt="" />
       </div>
@@ -41,8 +53,10 @@ const Product = () => {
         <h1 className='text-2xl font-medium'>₹{prod.price}</h1>
         <h1>{prod.description}</h1>
         <div className="btns flex gap-4 mt-4">
+          <Link to={`/update/${prod.id}`}>
           <button className='px-10 py-2.5 border-blue-400 border-2 uppercase font-medium bg-blue-400'>Update</button>
-          <button className='px-10 py-2.5 border-rose-400 border-2 uppercase font-medium bg-rose-400'>Delete</button>
+          </Link>
+          <button onClick={deleteHandler} className='px-10 py-2.5 border-rose-400 border-2 uppercase font-medium bg-rose-400'>Delete</button>
         </div>
       </div>
     </div>
