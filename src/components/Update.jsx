@@ -4,10 +4,10 @@ import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { productcontext } from '../contexts/ProductContext'
 
 const Update = () => {
-    const [localProds, setlocalProds] = useState(JSON.parse(localStorage.getItem("products"))|| [])
+    const [localProds, setlocalProds] = useState(JSON.parse(localStorage.getItem("products")) || [])
     const [prods, setprods] = useContext(productcontext)
 
-    const {id} = useParams()
+    const { id } = useParams()
     const prod = localProds.find(prod => prod.id === id)
     const navigate = useNavigate()
 
@@ -23,19 +23,18 @@ const Update = () => {
     const submitHandler = (e) => {
 
         e.preventDefault()
-        // local prod updation
-        const index = localProds.findIndex(prod=>prod.id ===id)
-        const copyLocalProds = [...localProds]
-        copyLocalProds[index]={id,title,image,desc,rate,count,category,price}
-        setlocalProds(copyLocalProds)
-
-        // context prod updation
-        const index1 = prods.findIndex(prod=>prod.id ===id)
-        const copyProds = [...prods]
-        copyProds[index1]={id,title,image,desc,rate,count,category,price}
-        setprods(copyProds)
         
-        localStorage.setItem("products",JSON.stringify(copyLocalProds))
+        // Updated product object
+        const updatedProduct = { id, title, image, desc, rate, count, category, price };
+
+        // Context prod updation
+        const updatedProds = prods.map(prod => prod.id === id ? updatedProduct : prod);
+        setprods(updatedProds);
+        
+        // Local prod updation
+        const updatedLocalProds = localProds.map(prod => prod.id === id ? updatedProduct : prod);
+        setlocalProds(updatedLocalProds);
+        localStorage.setItem("products", JSON.stringify(updatedLocalProds));
 
         settitle('')
         setimage('')
@@ -45,11 +44,11 @@ const Update = () => {
         setcategory("men's clothing")
         setprice('')
         navigate(`/product/${id}`)
-        
 
 
 
-        
+
+
 
     }
 
