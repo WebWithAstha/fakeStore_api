@@ -36,17 +36,17 @@ const Product = () => {
   return ( prod ?
     <>
     
-    <div className="back px-40 py-4 bg-gray-100 ">
+    <div className="back px-40 py-4 bg-slate-100 ">
       <Link to='/'>
       <h1 className="px-2 w-max cursor-pointer py-2 text-xl flex items-center gap-4">&#60; <span className='font-normal'>back</span></h1>
       </Link>
       </div>
     
-    <div className='px-40 py-8 flex  items-center h-max gap-20'>
-      <div className="img w-[30vw] aspect-square p-6 bg-white border">
+    <div className='lg:px-40 px-20 py-8 flex lg:flex-row flex-col  items-center h-max lg:gap-20'>
+      <div className="img lg:w-[40vw] lg:h-[30vw] h-[40vw] w-full lg:px-6 px-10 aspect-square p-6 bg-white border">
         <img className='w-full h-full object-contain' src={prod.image} alt="" />
       </div>
-      <div className="dets flex flex-col pt-20 w-[30%] gap-1">
+      <div className="dets flex flex-col lg:pt-20 pt-4 2xl:w-[50%] lg:w-[40%]  gap-1">
         <h1>brand</h1>
         <h1 className='font-medium text-3xl mb-2'>{prod.title}</h1>
         <h1 className='opacity-45'>{prod.category}</h1>

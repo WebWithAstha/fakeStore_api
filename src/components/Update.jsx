@@ -55,7 +55,7 @@ const Update = () => {
     return (
         <>
             <div className="w-full min-h-screen">
-                <div className="back px-40 py-4 bg-gray-100 ">
+                <div className="back px-40 py-4 bg-slate-100 ">
                     <Link to='/'>
                         <h1 className="px-2 w-max cursor-pointer py-2 text-xl flex items-center gap-4">&#60; <span className='font-normal'>back</span></h1>
                     </Link>
@@ -80,7 +80,7 @@ const Update = () => {
                             <input onChange={e => setcount(e.target.value)} value={count} className="mt-1 p-2 w-full border rounded-md" type="Number" min="0" max="100000" placeholder='Rate count' />
                         </div>
                         <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-600" htmlFor="category"
+                            <label className="block text-sm font-medium text-slate-600" htmlFor="category"
                             >Category</label>
                             <select defaultValue={category} onChange={e => setcategory(e.target.value)} className='mt-1 p-2 w-full border rounded-md' name="" id="">
                                 <option value="men's clothing">men's clothing</option>
@@ -92,7 +92,7 @@ const Update = () => {
 
 
                         <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-600" htmlFor="bio"
+                            <label className="block text-sm font-medium text-slate-600" htmlFor="bio"
                             >Description</label>
                             <textarea
                                 onChange={e => setdesc(e.target.value)}
