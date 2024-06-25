@@ -1,9 +1,11 @@
 import { nanoid } from 'nanoid'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { productcontext } from '../contexts/ProductContext'
 
 const Create = () => {
-    const [prods, setprods] = useState(JSON.parse(localStorage.getItem("products"))|| [])
+    const [prods,setprods] = useContext(productcontext)
+    const [localProds, setlocalProds] = useState(JSON.parse(localStorage.getItem("products"))|| [])
     const navigate = useNavigate()
 
 
@@ -18,8 +20,8 @@ const Create = () => {
     const submitHandler = (e) => {
         e.preventDefault()
         const updatedProd = {id:nanoid(),title,image,description:desc,rating:{rate,count},category,price}
-        setprods([...prods,updatedProd])
-        localStorage.setItem("products",JSON.stringify([...prods,updatedProd]))
+        setprods([updatedProd,...prods])
+        localStorage.setItem("products", JSON.stringify([updatedProd,...localProds]))
         settitle('')
         setimage('')
         setdesc('')

@@ -7,7 +7,7 @@ const ProductContext = ({ children }) => {
 
   const getProds = async () => {
     const { data } = await axiosInstance.get('/products')
-    const localProd = JSON.parse(localStorage.getItem("products"))
+    const localProd = JSON.parse(localStorage.getItem("products")) || []
 
     setprods([...localProd,...data])
   }
